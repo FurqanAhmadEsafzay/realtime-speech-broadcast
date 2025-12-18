@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+venv/
+
+# Audio files
+recordings/*.wav
+
+# Speech models
+vosk-model*/
+models/
+
+# OS
+.DS_Store
+
+# Logs
+*.log

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Live Speech Stream</title>
+</head>
+<body>
+  <h3>Live Transcription</h3>
+  <pre id="output"></pre>
+
+  <script>
+    const output = document.getElementById("output");
+    let socket;
+
+    function connect() {
+      socket = new WebSocket("ws://localhost:8765");
+
+      socket.onopen = () => {
+        console.log("Connected to server");
+      };
+
+      socket.onmessage = (event) => {
+        output.textContent += event.data + "\n";
+      };
+
+      socket.onclose = () => {
+        console.log("Disconnected. Reconnecting...");
+        setTimeout(connect, 2000);
+      };
+
+      socket.onerror = (err) => {
+        console.error("WebSocket error:", err);
+        socket.close();
+      };
+    }
+
+    connect();
+  </script>
+</body>
+</html>
